@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="欢迎来到西楼的博客">
 <meta property="og:description" content="项目背景在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。 因为以后要支持多语言，出于多语言的兼容问题，现需要将 Seata 的通信协议拓展支持 HTTP2。 HTTP2 跟 HTTP1.1 有什么区别 多路复用 头部压缩 二进制分帧 请求优先级 服务器推送  方案描述打包、拆包（头部压缩、二进制分帧） 修">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://xilou31.github.io/1c4cd1f0/Seata%20protocol%20supports%20http2/seata_protobuf.png">
+<meta property="og:image" content="http://xilou31.github.io/1c4cd1f0/seata_protobuf.png">
 <meta property="article:published_time" content="2021-06-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-02T03:04:59.167Z">
+<meta property="article:modified_time" content="2021-07-02T03:11:06.726Z">
 <meta property="article:author" content="西楼">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xilou31.github.io/1c4cd1f0/Seata%20protocol%20supports%20http2/seata_protobuf.png">
+<meta name="twitter:image" content="http://xilou31.github.io/1c4cd1f0/seata_protobuf.png">
     
     
       
@@ -144,7 +144,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。<br><img src="./Seata protocol supports http2/seata_protobuf.png" alt="seata_protobuf.png"></p>
+    <h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。<br><img src="/1c4cd1f0/seata_protobuf.png" alt="seata_protobuf.png"></p>
 <p>因为以后要支持多语言，出于多语言的兼容问题，现需要将 Seata 的通信协议拓展支持 HTTP2。</p>
 <h2 id="HTTP2-跟-HTTP1-1-有什么区别"><a href="#HTTP2-跟-HTTP1-1-有什么区别" class="headerlink" title="HTTP2 跟 HTTP1.1 有什么区别"></a>HTTP2 跟 HTTP1.1 有什么区别</h2><ol>
 <li>多路复用</li>
