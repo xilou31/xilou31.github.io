@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="贪心算法分配问题 [x] 455. Assign Cookies (Easy) [x] 135. Candy (Hard)  区间问题 [ ] 435. Non-overlapping Intervals (Medium)  练习基础难度 [x] 605. Can Place Flowers (Easy) [ ] 452. Minimum Number of Arrows to Burst Bal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode刷题题库">
+<meta property="og:url" content="http://xilou31.github.io/7784fafc/index.html">
+<meta property="og:site_name" content="欢迎来到西楼的博客">
+<meta property="og:description" content="贪心算法分配问题 [x] 455. Assign Cookies (Easy) [x] 135. Candy (Hard)  区间问题 [ ] 435. Non-overlapping Intervals (Medium)  练习基础难度 [x] 605. Can Place Flowers (Easy) [ ] 452. Minimum Number of Arrows to Burst Bal">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-02T03:49:25.932Z">
+<meta property="article:modified_time" content="2021-07-02T03:49:25.933Z">
+<meta property="article:author" content="西楼">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>LeetCode刷题题库</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/dcb67373/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/d59abd41/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/7784fafc/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/7784fafc/&text=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/7784fafc/&is_video=false&description=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LeetCode刷题题库&body=Check out this article: http://xilou31.github.io/7784fafc/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/7784fafc/&name=LeetCode刷题题库&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/7784fafc/&t=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#贪心算法"><span class="toc-number">1.</span> <span class="toc-text">贪心算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配问题"><span class="toc-number">1.1.</span> <span class="toc-text">分配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区间问题"><span class="toc-number">1.2.</span> <span class="toc-text">区间问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-number">1.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度"><span class="toc-number">1.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度"><span class="toc-number">1.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双指针"><span class="toc-number">2.</span> <span class="toc-text">双指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-Sum"><span class="toc-number">2.1.</span> <span class="toc-text">Two Sum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#归并两个有序数组"><span class="toc-number">2.2.</span> <span class="toc-text">归并两个有序数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-number">2.3.</span> <span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动窗口"><span class="toc-number">2.4.</span> <span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-1"><span class="toc-number">2.5.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-1"><span class="toc-number">2.5.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-1"><span class="toc-number">2.5.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二分查找"><span class="toc-number">3.</span> <span class="toc-text">二分查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#求开方"><span class="toc-number">3.1.</span> <span class="toc-text">求开方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找区间"><span class="toc-number">3.2.</span> <span class="toc-text">查找区间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#旋转数组查找数字"><span class="toc-number">3.3.</span> <span class="toc-text">旋转数组查找数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-2"><span class="toc-number">3.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-2"><span class="toc-number">3.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-2"><span class="toc-number">3.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法"><span class="toc-number">4.</span> <span class="toc-text">排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用排序"><span class="toc-number">4.1.</span> <span class="toc-text">常用排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速选择"><span class="toc-number">4.2.</span> <span class="toc-text">快速选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#桶排序"><span class="toc-number">4.3.</span> <span class="toc-text">桶排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-3"><span class="toc-number">4.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-3"><span class="toc-number">4.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-3"><span class="toc-number">4.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索算法"><span class="toc-number">5.</span> <span class="toc-text">搜索算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深度优先"><span class="toc-number">5.1.</span> <span class="toc-text">深度优先</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回溯法"><span class="toc-number">5.2.</span> <span class="toc-text">回溯法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广度优先"><span class="toc-number">6.</span> <span class="toc-text">广度优先</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-4"><span class="toc-number">6.1.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-4"><span class="toc-number">6.1.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-4"><span class="toc-number">6.1.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划"><span class="toc-number">7.</span> <span class="toc-text">动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一维动态规划"><span class="toc-number">7.1.</span> <span class="toc-text">一维动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二维动态规划"><span class="toc-number">7.2.</span> <span class="toc-text">二维动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割类型"><span class="toc-number">7.3.</span> <span class="toc-text">分割类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子序列"><span class="toc-number">7.4.</span> <span class="toc-text">子序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#背包"><span class="toc-number">7.5.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串编辑"><span class="toc-number">7.6.</span> <span class="toc-text">字符串编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#股票交易"><span class="toc-number">7.7.</span> <span class="toc-text">股票交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-5"><span class="toc-number">7.8.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-5"><span class="toc-number">7.8.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-5"><span class="toc-number">7.8.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分治法"><span class="toc-number">8.</span> <span class="toc-text">分治法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式问题"><span class="toc-number">8.1.</span> <span class="toc-text">表达式问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-6"><span class="toc-number">8.2.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-6"><span class="toc-number">8.2.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-6"><span class="toc-number">8.2.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学问题"><span class="toc-number">9.</span> <span class="toc-text">数学问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#公倍数和公因数"><span class="toc-number">9.1.</span> <span class="toc-text">公倍数和公因数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#质数"><span class="toc-number">9.2.</span> <span class="toc-text">质数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字处理"><span class="toc-number">9.3.</span> <span class="toc-text">数字处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机与取样"><span class="toc-number">9.4.</span> <span class="toc-text">随机与取样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-7"><span class="toc-number">9.5.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-7"><span class="toc-number">9.5.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-7"><span class="toc-number">9.5.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位运算"><span class="toc-number">10.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#位运算基础问题"><span class="toc-number">10.1.</span> <span class="toc-text">位运算基础问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二进制特性"><span class="toc-number">10.2.</span> <span class="toc-text">二进制特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-8"><span class="toc-number">10.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-8"><span class="toc-number">10.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-8"><span class="toc-number">10.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">11.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">11.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈和队列"><span class="toc-number">11.2.</span> <span class="toc-text">栈和队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单调栈"><span class="toc-number">11.3.</span> <span class="toc-text">单调栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先队列"><span class="toc-number">11.4.</span> <span class="toc-text">优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双端队列"><span class="toc-number">11.5.</span> <span class="toc-text">双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希表"><span class="toc-number">11.6.</span> <span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重集合和映射"><span class="toc-number">11.7.</span> <span class="toc-text">多重集合和映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀和和积分图"><span class="toc-number">11.8.</span> <span class="toc-text">前缀和和积分图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-9"><span class="toc-number">11.9.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-9"><span class="toc-number">11.9.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-9"><span class="toc-number">11.9.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-number">12.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串比较"><span class="toc-number">12.1.</span> <span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串理解"><span class="toc-number">12.2.</span> <span class="toc-text">字符串理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串匹配"><span class="toc-number">12.3.</span> <span class="toc-text">字符串匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-10"><span class="toc-number">12.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-10"><span class="toc-number">12.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-10"><span class="toc-number">12.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表"><span class="toc-number">13.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表基本操作"><span class="toc-number">13.1.</span> <span class="toc-text">链表基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他链表技巧"><span class="toc-number">13.2.</span> <span class="toc-text">其他链表技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-11"><span class="toc-number">13.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-11"><span class="toc-number">13.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-11"><span class="toc-number">13.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树"><span class="toc-number">14.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#树的递归"><span class="toc-number">14.1.</span> <span class="toc-text">树的递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-number">14.2.</span> <span class="toc-text">层次遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前中后序遍历"><span class="toc-number">14.3.</span> <span class="toc-text">前中后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉搜索树"><span class="toc-number">14.4.</span> <span class="toc-text">二叉搜索树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典树"><span class="toc-number">14.5.</span> <span class="toc-text">字典树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-12"><span class="toc-number">14.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-12"><span class="toc-number">14.6.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-12"><span class="toc-number">14.6.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图"><span class="toc-number">15.</span> <span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二分图"><span class="toc-number">15.1.</span> <span class="toc-text">二分图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序"><span class="toc-number">15.2.</span> <span class="toc-text">拓扑排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-13"><span class="toc-number">15.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-13"><span class="toc-number">15.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-13"><span class="toc-number">15.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶数据结构"><span class="toc-number">16.</span> <span class="toc-text">高阶数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并查集"><span class="toc-number">16.1.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合数据结构"><span class="toc-number">16.2.</span> <span class="toc-text">复合数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-14"><span class="toc-number">16.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-14"><span class="toc-number">16.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-14"><span class="toc-number">16.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        LeetCode刷题题库
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">西楼</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-02T03:49:25.932Z" itemprop="datePublished">2021-07-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="分配问题"><a href="#分配问题" class="headerlink" title="分配问题"></a>分配问题</h3><ul>
+<li>[x] 455. Assign Cookies (Easy)</li>
+<li>[x] 135. Candy (Hard)</li>
+</ul>
+<h3 id="区间问题"><a href="#区间问题" class="headerlink" title="区间问题"></a>区间问题</h3><ul>
+<li>[ ] 435. Non-overlapping Intervals (Medium)</li>
+</ul>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度"><a href="#基础难度" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[x] 605. Can Place Flowers (Easy)</li>
+<li>[ ] 452. Minimum Number of Arrows to Burst Balloons (Medium)</li>
+<li>[ ] 763. Partition Labels (Medium)</li>
+<li>[x] 122. Best Time to Buy and Sell Stock II (Easy)</li>
+</ul>
+<h4 id="进阶难度"><a href="#进阶难度" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 406. Queue Reconstruction by Height (Medium)</li>
+<li>[ ] 665. Non-decreasing Array (Easy)</li>
+</ul>
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><h3 id="Two-Sum"><a href="#Two-Sum" class="headerlink" title="Two Sum"></a>Two Sum</h3><ul>
+<li>[x] 167. Two Sum II - Input array is sorted (Easy)</li>
+</ul>
+<h3 id="归并两个有序数组"><a href="#归并两个有序数组" class="headerlink" title="归并两个有序数组"></a>归并两个有序数组</h3><ul>
+<li>[ ] 88. Merge Sorted Array (Easy)</li>
+</ul>
+<h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><ul>
+<li>[ ] 142. Linked List Cycle II (Medium)</li>
+</ul>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><ul>
+<li>[ ] 76. Minimum Window Substring (Hard)</li>
+</ul>
+<h3 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-1"><a href="#基础难度-1" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 633. Sum of Square Numbers (Easy)</li>
+<li>[ ] 680. Valid Palindrome II (Easy)</li>
+<li>[ ] 524. Longest Word in Dictionary through Deleting (Medium)</li>
+</ul>
+<h4 id="进阶难度-1"><a href="#进阶难度-1" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 340. Longest Substring with At Most K Distinct Characters (Hard)</li>
+</ul>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="求开方"><a href="#求开方" class="headerlink" title="求开方"></a>求开方</h3><ul>
+<li>[ ] 69. Sqrt(x) (Easy)</li>
+</ul>
+<h3 id="查找区间"><a href="#查找区间" class="headerlink" title="查找区间"></a>查找区间</h3><ul>
+<li>[ ] 34. Find First and Last Position of Element in Sorted Array (Medium)</li>
+</ul>
+<h3 id="旋转数组查找数字"><a href="#旋转数组查找数字" class="headerlink" title="旋转数组查找数字"></a>旋转数组查找数字</h3><ul>
+<li>[ ] 81. Search in Rotated Sorted Array II (Medium)</li>
+</ul>
+<h3 id="练习-2"><a href="#练习-2" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-2"><a href="#基础难度-2" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 154. Find Minimum in Rotated Sorted Array II (Medium)</li>
+<li>[ ] 540. Single Element in a Sorted Array (Medium)</li>
+</ul>
+<h4 id="进阶难度-2"><a href="#进阶难度-2" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 4. Median of Two Sorted Arrays (Hard)</li>
+</ul>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="常用排序"><a href="#常用排序" class="headerlink" title="常用排序"></a>常用排序</h3><ul>
+<li>[ ] 快速排序(Quicksort)</li>
+<li>[ ] 归并排序(Merge Sort)</li>
+<li>[ ] 插入排序(Insertion Sort)</li>
+<li>[ ] 冒泡排序(Bubble Sort)</li>
+<li>[ ] 选择排序(Selection Sort)</li>
+</ul>
+<h3 id="快速选择"><a href="#快速选择" class="headerlink" title="快速选择"></a>快速选择</h3><ul>
+<li>[ ] 215. Kth Largest Element in an Array</li>
+</ul>
+<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><ul>
+<li>[ ] 347. Top K Frequent Elements (Medium)</li>
+</ul>
+<h3 id="练习-3"><a href="#练习-3" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-3"><a href="#基础难度-3" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 451. Sort Characters By Frequency (Medium)</li>
+</ul>
+<h4 id="进阶难度-3"><a href="#进阶难度-3" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 75. Sort Colors (Medium)</li>
+</ul>
+<h2 id="搜索算法"><a href="#搜索算法" class="headerlink" title="搜索算法"></a>搜索算法</h2><h3 id="深度优先"><a href="#深度优先" class="headerlink" title="深度优先"></a>深度优先</h3><ul>
+<li>[ ] 695. Max Area of Island (Easy)</li>
+<li>[ ] 547. Friend Circles (Medium)</li>
+<li>[ ] 417. Pacific Atlantic Water Flow (Medium)</li>
+</ul>
+<h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><ul>
+<li>[ ] 46. Permutations (Medium)</li>
+<li>[ ] 77. Combinations (Medium)</li>
+<li>[ ] 79. Word Search (Medium)</li>
+<li>[ ] 51. N-Queens (Hard)</li>
+</ul>
+<h2 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h2><ul>
+<li>[ ] 934. Shortest Bridge (Medium)</li>
+<li>[ ] 126. Word Ladder II (Hard)</li>
+</ul>
+<h3 id="练习-4"><a href="#练习-4" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-4"><a href="#基础难度-4" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 130. Surrounded Regions (Medium)</li>
+<li>[ ] 257. Binary Tree Paths (Easy)</li>
+</ul>
+<h4 id="进阶难度-4"><a href="#进阶难度-4" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 47. Permutations II (Medium)</li>
+<li>[ ] 40. Combination Sum II (Medium)</li>
+<li>[ ] 37. Sudoku Solver (Hard)</li>
+<li>[ ] 310. Minimum Height Trees (Medium)</li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="一维动态规划"><a href="#一维动态规划" class="headerlink" title="一维动态规划"></a>一维动态规划</h3><ul>
+<li>[x] 70. Climbing Stairs (Easy)</li>
+<li>[x] 198. House Robber (Easy)</li>
+<li>[ ] 413. Arithmetic Slices (Medium)</li>
+</ul>
+<h3 id="二维动态规划"><a href="#二维动态规划" class="headerlink" title="二维动态规划"></a>二维动态规划</h3><ul>
+<li>[ ] 64. Minimum Path Sum (Medium)</li>
+<li>[ ] 542. 01 Matrix (Medium)</li>
+<li>[ ] 221. Maximal Square (Medium)</li>
+</ul>
+<h3 id="分割类型"><a href="#分割类型" class="headerlink" title="分割类型"></a>分割类型</h3><ul>
+<li>[ ] 279. Perfect Squares (Medium)</li>
+<li>[ ] 91. Decode Ways (Medium)</li>
+<li>[ ] 139. Word Break (Medium)</li>
+</ul>
+<h3 id="子序列"><a href="#子序列" class="headerlink" title="子序列"></a>子序列</h3><ul>
+<li>[ ] 300. Longest Increasing Subsequence (Medium)</li>
+<li>[ ] 1143. Longest Commom Subsequence (Medium)</li>
+</ul>
+<h3 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h3><ul>
+<li>[ ] 416. Partition Equal Subset Sum (Medium)</li>
+<li>[ ] 474. Ones and Zeroes (Medium)</li>
+<li>[ ] 322. Coin Change (Medium)</li>
+</ul>
+<h3 id="字符串编辑"><a href="#字符串编辑" class="headerlink" title="字符串编辑"></a>字符串编辑</h3><ul>
+<li>[ ] 72. Edit Distance (Hard)</li>
+<li>[ ] 650. 2 Keys Keyboard (Medium)</li>
+<li>[ ] 10. Regular Expression Matching (Hard)</li>
+</ul>
+<h3 id="股票交易"><a href="#股票交易" class="headerlink" title="股票交易"></a>股票交易</h3><ul>
+<li>[x] 121. Best Time to Buy and Sell Stock (Easy)</li>
+<li>[ ] 188. Best Time to Buy and Sell Stock IV (Hard)</li>
+<li>[ ] 309. Best Time to Buy and Sell Stock with Cooldown (Medium)</li>
+</ul>
+<h3 id="练习-5"><a href="#练习-5" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-5"><a href="#基础难度-5" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 213. House Robber II (Medium)</li>
+<li>[x] 53. Maximum Subarray (Easy)</li>
+<li>[ ] 343. Integer Break (Medium)</li>
+<li>[ ] 583. Delete Operation for Two Strings (Medium)</li>
+</ul>
+<h4 id="进阶难度-5"><a href="#进阶难度-5" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 646. Maximum Length of Pair Chain (Medium)</li>
+<li>[ ] 376. Wiggle Subsequence (Medium)</li>
+<li>[ ] 494. Target Sum (Medium)</li>
+<li>[ ] 714. Best Time to Buy and Sell Stock with Transaction Fee (Medium)</li>
+</ul>
+<h2 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h2><h3 id="表达式问题"><a href="#表达式问题" class="headerlink" title="表达式问题"></a>表达式问题</h3><ul>
+<li>[ ] 241. Different Ways to Add Parentheses (Medium)</li>
+</ul>
+<h3 id="练习-6"><a href="#练习-6" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-6"><a href="#基础难度-6" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 932. Beautiful Array (Medium)</li>
+</ul>
+<h4 id="进阶难度-6"><a href="#进阶难度-6" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 312. Burst Balloons (Hard)</li>
+</ul>
+<h2 id="数学问题"><a href="#数学问题" class="headerlink" title="数学问题"></a>数学问题</h2><h3 id="公倍数和公因数"><a href="#公倍数和公因数" class="headerlink" title="公倍数和公因数"></a>公倍数和公因数</h3><ul>
+<li>[ ] 辗转相除法</li>
+</ul>
+<h3 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h3><ul>
+<li>[ ] 204. Count Primes (Easy)</li>
+</ul>
+<h3 id="数字处理"><a href="#数字处理" class="headerlink" title="数字处理"></a>数字处理</h3><ul>
+<li>[ ] 504. Base 7 (Easy)</li>
+<li>[ ] 172. Factorial Trailing Zeroes</li>
+<li>[ ] 415. Add Strings (Easy)</li>
+<li>[ ] 326. Power of Three (Easy)</li>
+</ul>
+<h3 id="随机与取样"><a href="#随机与取样" class="headerlink" title="随机与取样"></a>随机与取样</h3><ul>
+<li>[ ] 384. Shuffle an Array (Medium)</li>
+<li>[ ] 528. Random Pick with Weight (Medium)</li>
+<li>[ ] 382. Linked List Random Node (Medium)</li>
+</ul>
+<h3 id="练习-7"><a href="#练习-7" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-7"><a href="#基础难度-7" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 168. Excel Sheet Column Title (Easy)</li>
+<li>[ ] 67. Add Binary (Easy)</li>
+<li>[ ] 238. Product of Array Except Self (Medium)</li>
+</ul>
+<h4 id="进阶难度-7"><a href="#进阶难度-7" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 462. Minimum Moves to Equal Array Elements II (Medium)</li>
+<li>[ ] 169. Majority Element (Easy)</li>
+<li>[ ] 470. Implement Rand10() Using Rand7() (Medium)</li>
+<li>[ ] 202. Happy Number (Easy)</li>
+</ul>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><h3 id="位运算基础问题"><a href="#位运算基础问题" class="headerlink" title="位运算基础问题"></a>位运算基础问题</h3><ul>
+<li>[ ] 461. Hamming Distance (Easy)</li>
+<li>[ ] 190. Reverse Bits (Easy)</li>
+<li>[ ] 136. Single Number (Easy)</li>
+</ul>
+<h3 id="二进制特性"><a href="#二进制特性" class="headerlink" title="二进制特性"></a>二进制特性</h3><ul>
+<li>[ ] 342. Power of Four (Easy)</li>
+<li>[ ] 318. Maximum Product of Word Lengths (Medium)</li>
+<li>[ ] 338. Counting Bits (Medium)</li>
+</ul>
+<h3 id="练习-8"><a href="#练习-8" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-8"><a href="#基础难度-8" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 268. Missing Number (Easy)</li>
+<li>[ ] 693. Binary Number with Alternating Bits (Easy)</li>
+<li>[ ] 476. Number Complement (Easy)</li>
+</ul>
+<h4 id="进阶难度-8"><a href="#进阶难度-8" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 260. Single Number III (Medium)</li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li>[x] 448. Find All Numbers Disappeared in an Array (Easy)</li>
+<li>[ ] 48. Rotate Image (Medium)</li>
+<li>[ ] 240. Search a 2D Matrix II (Medium)</li>
+<li>[ ] 769. Max Chunks To Make Sorted (Medium)</li>
+</ul>
+<h3 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h3><ul>
+<li>[ ] 232. Implement Queue using Stacks (Easy)</li>
+<li>[ ] 155. Min Stack (Easy)</li>
+<li>[ ] 20. Valid Parentheses (Easy)</li>
+</ul>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><ul>
+<li>[ ] 739. Daily Temperatures (Medium)</li>
+</ul>
+<h3 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h3><ul>
+<li>[ ] 23. Merge k Sorted Lists (Hard)</li>
+<li>[ ] 218. The Skyline Problem (Hard)</li>
+</ul>
+<h3 id="双端队列"><a href="#双端队列" class="headerlink" title="双端队列"></a>双端队列</h3><ul>
+<li>[ ] 239. Sliding Window Maximum (Hard)</li>
+</ul>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><ul>
+<li>[ ] 1. Two Sum (Easy)</li>
+<li>[ ] 128. Longest Consecutive Sequence (Hard)</li>
+<li>[ ] 149. Max Points on a Line (Hard)</li>
+</ul>
+<h3 id="多重集合和映射"><a href="#多重集合和映射" class="headerlink" title="多重集合和映射"></a>多重集合和映射</h3><ul>
+<li>[ ] 332. Reconstruct Itinerary (Medium)</li>
+</ul>
+<h3 id="前缀和和积分图"><a href="#前缀和和积分图" class="headerlink" title="前缀和和积分图"></a>前缀和和积分图</h3><ul>
+<li>[ ] 303. Range Sum Query - Immutable (Easy)</li>
+<li>[ ] 304. Range Sum Query 2D - Immutable (Medium)</li>
+<li>[ ] 560. Subarray Sum Equals K (Medium)</li>
+</ul>
+<h3 id="练习-9"><a href="#练习-9" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-9"><a href="#基础难度-9" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 566. Reshape the Matrix (Easy)</li>
+<li>[ ] 225. Implement Stack using Queues (Easy)</li>
+<li>[ ] 503. Next Greater Element II (Medium)</li>
+<li>[ ] 217. Contains Duplicate (Easy)</li>
+<li>[ ] 697. Degree of an Array (Easy)</li>
+<li>[ ] 594. Longest Harmonious Subsequence (Easy)</li>
+</ul>
+<h4 id="进阶难度-9"><a href="#进阶难度-9" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 287. Find the Duplicate Number (Medium)</li>
+<li>[ ] 313. Super Ugly Number (Medium)</li>
+<li>[ ] 870. Advantage Shuffle (Medium)</li>
+<li>[ ] 307. Range Sum Query - Mutable (Medium)</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h3><ul>
+<li>[x] 242. Valid Anagram (Easy)</li>
+<li>[x] 205. Isomorphic Strings (Easy)</li>
+<li>[ ] 647. Palindromic Substrings (Medium)</li>
+<li>[ ] 696. Count Binary Substrings (Easy)</li>
+</ul>
+<h3 id="字符串理解"><a href="#字符串理解" class="headerlink" title="字符串理解"></a>字符串理解</h3><ul>
+<li>[ ] 227. Basic Calculator II (Medium)</li>
+</ul>
+<h3 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h3><ul>
+<li>[ ] 28. Implement strStr() (Easy)</li>
+</ul>
+<h3 id="练习-10"><a href="#练习-10" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-10"><a href="#基础难度-10" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[x] 409. Longest Palindrome (Easy)</li>
+<li>[ ] 3. Longest Substring Without Repeating Characters (Medium)</li>
+</ul>
+<h4 id="进阶难度-10"><a href="#进阶难度-10" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 772. Basic Calculator III (Hard)</li>
+<li>[ ] 5. Longest Palindromic Substring (Medium)</li>
+</ul>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="链表基本操作"><a href="#链表基本操作" class="headerlink" title="链表基本操作"></a>链表基本操作</h3><ul>
+<li>[ ] 206. Reverse Linked List (Easy)</li>
+<li>[ ] 21. Merge Two Sorted Lists (Easy)</li>
+<li>[ ] 24. Swap Nodes in Pairs (Medium)</li>
+</ul>
+<h3 id="其他链表技巧"><a href="#其他链表技巧" class="headerlink" title="其他链表技巧"></a>其他链表技巧</h3><ul>
+<li>[ ] 160. Intersection of Two Linked Lists (Easy)</li>
+<li>[ ] 234. Palindrome Linked List (Easy)</li>
+</ul>
+<h3 id="练习-11"><a href="#练习-11" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-11"><a href="#基础难度-11" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 83. Remove Duplicates from Sorted List (Easy)</li>
+<li>[ ] 328. Odd Even Linked List (Medium)</li>
+<li>[ ] 19. Remove Nth Node From End of List (Medium)</li>
+</ul>
+<h4 id="进阶难度-11"><a href="#进阶难度-11" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 148. Sort List (Medium)</li>
+</ul>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="树的递归"><a href="#树的递归" class="headerlink" title="树的递归"></a>树的递归</h3><ul>
+<li>[ ] 104. Maximum Depth of Binary Tree (Easy)</li>
+<li>[ ] 110. Balanced Binary Tree (Easy)</li>
+<li>[ ] 543. Diameter of Binary Tree (Easy)</li>
+<li>[ ] 437. Path Sum III (Easy)</li>
+<li>[ ] 101. Symmetric Tree (Easy)</li>
+<li>[ ] 1110. Delete Nodes And Return Forest (Medium)</li>
+</ul>
+<h3 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h3><ul>
+<li>[ ] 637. Average of Levels in Binary Tree (Easy)</li>
+</ul>
+<h3 id="前中后序遍历"><a href="#前中后序遍历" class="headerlink" title="前中后序遍历"></a>前中后序遍历</h3><ul>
+<li>[ ] 105. Construct Binary Tree from Preorder and Inorder Traversal (Medium)</li>
+<li>[ ] 144. Binary Tree Preorder Traversal (Medium)</li>
+</ul>
+<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ul>
+<li>[ ] 99. Recover Binary Search Tree (Hard)</li>
+<li>[ ] 669. Trim a Binary Search Tree (Easy)</li>
+</ul>
+<h3 id="字典树"><a href="#字典树" class="headerlink" title="字典树"></a>字典树</h3><ul>
+<li>[ ] 208. Implement Trie (Prefix Tree) (Medium)</li>
+</ul>
+<h3 id="练习-12"><a href="#练习-12" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-12"><a href="#基础难度-12" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 226. Invert Binary Tree (Easy)</li>
+<li>[ ] 617. Merge Two Binary Trees (Easy)</li>
+<li>[ ] 572. Subtree of Another Tree (Easy)</li>
+<li>[ ] 404. Sum of Left Leaves (Easy)</li>
+<li>[ ] 513. Find Bottom Left Tree Value (Easy)</li>
+<li>[ ] 538. Convert BST to Greater Tree (Easy)</li>
+<li>[ ] 235. Lowest Common Ancestor of a Binary Search Tree (Easy)</li>
+<li>[ ] 530. Minimum Absolute Difference in BST (Easy)</li>
+</ul>
+<h4 id="进阶难度-12"><a href="#进阶难度-12" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 889. Construct Binary Tree from Preorder and Postorder Traversal (Medium)</li>
+<li>[ ] 106. Construct Binary Tree from Inorder and Postorder Traversal (Medium)</li>
+<li>[ ] 94. Binary Tree Inorder Traversal (Medium)</li>
+<li>[ ] 145. Binary Tree Postorder Traversal (Medium)</li>
+<li>[ ] 236. Lowest Common Ancestor of a Binary Tree (Medium)</li>
+<li>[ ] 109. Convert Sorted List to Binary Search Tree (Medium)</li>
+<li>[ ] 897. Increasing Order Search Tree (Easy)</li>
+<li>[ ] 653. Two Sum IV - Input is a BST (Easy)</li>
+<li>[ ] 450. Delete Node in a BST (Medium)</li>
+</ul>
+<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h3><ul>
+<li>[ ] 785. Is Graph Bipartite? (Medium)</li>
+</ul>
+<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><ul>
+<li>[ ] 210. Course Schedule II (Medium)</li>
+</ul>
+<h3 id="练习-13"><a href="#练习-13" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-13"><a href="#基础难度-13" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 1059. All Paths from Source Lead to Destination (Medium)</li>
+</ul>
+<h4 id="进阶难度-13"><a href="#进阶难度-13" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 1135. Connecting Cities With Minimum Cost (Medium)</li>
+<li>[ ] 882. Reachable Nodes In Subdivided Graph (Hard)</li>
+</ul>
+<h2 id="高阶数据结构"><a href="#高阶数据结构" class="headerlink" title="高阶数据结构"></a>高阶数据结构</h2><h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><ul>
+<li>[ ] 684. Redundant Connection (Medium)</li>
+</ul>
+<h3 id="复合数据结构"><a href="#复合数据结构" class="headerlink" title="复合数据结构"></a>复合数据结构</h3><ul>
+<li>[ ] 146. LRU Cache (Medium)</li>
+</ul>
+<h3 id="练习-14"><a href="#练习-14" class="headerlink" title="练习"></a>练习</h3><h4 id="基础难度-14"><a href="#基础难度-14" class="headerlink" title="基础难度"></a>基础难度</h4><ul>
+<li>[ ] 1135. Connecting Cities With Minimum Cost (Medium)</li>
+<li>[ ] 380. Insert Delete GetRandom O(1) (Medium)</li>
+</ul>
+<h4 id="进阶难度-14"><a href="#进阶难度-14" class="headerlink" title="进阶难度"></a>进阶难度</h4><ul>
+<li>[ ] 432. All O‘one Data Structure (Hard)</li>
+<li>[ ] 716. Max Stack (Easy)</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#贪心算法"><span class="toc-number">1.</span> <span class="toc-text">贪心算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配问题"><span class="toc-number">1.1.</span> <span class="toc-text">分配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区间问题"><span class="toc-number">1.2.</span> <span class="toc-text">区间问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-number">1.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度"><span class="toc-number">1.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度"><span class="toc-number">1.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双指针"><span class="toc-number">2.</span> <span class="toc-text">双指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-Sum"><span class="toc-number">2.1.</span> <span class="toc-text">Two Sum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#归并两个有序数组"><span class="toc-number">2.2.</span> <span class="toc-text">归并两个有序数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-number">2.3.</span> <span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动窗口"><span class="toc-number">2.4.</span> <span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-1"><span class="toc-number">2.5.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-1"><span class="toc-number">2.5.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-1"><span class="toc-number">2.5.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二分查找"><span class="toc-number">3.</span> <span class="toc-text">二分查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#求开方"><span class="toc-number">3.1.</span> <span class="toc-text">求开方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找区间"><span class="toc-number">3.2.</span> <span class="toc-text">查找区间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#旋转数组查找数字"><span class="toc-number">3.3.</span> <span class="toc-text">旋转数组查找数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-2"><span class="toc-number">3.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-2"><span class="toc-number">3.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-2"><span class="toc-number">3.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法"><span class="toc-number">4.</span> <span class="toc-text">排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用排序"><span class="toc-number">4.1.</span> <span class="toc-text">常用排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速选择"><span class="toc-number">4.2.</span> <span class="toc-text">快速选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#桶排序"><span class="toc-number">4.3.</span> <span class="toc-text">桶排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-3"><span class="toc-number">4.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-3"><span class="toc-number">4.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-3"><span class="toc-number">4.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索算法"><span class="toc-number">5.</span> <span class="toc-text">搜索算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深度优先"><span class="toc-number">5.1.</span> <span class="toc-text">深度优先</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回溯法"><span class="toc-number">5.2.</span> <span class="toc-text">回溯法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广度优先"><span class="toc-number">6.</span> <span class="toc-text">广度优先</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-4"><span class="toc-number">6.1.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-4"><span class="toc-number">6.1.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-4"><span class="toc-number">6.1.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划"><span class="toc-number">7.</span> <span class="toc-text">动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一维动态规划"><span class="toc-number">7.1.</span> <span class="toc-text">一维动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二维动态规划"><span class="toc-number">7.2.</span> <span class="toc-text">二维动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割类型"><span class="toc-number">7.3.</span> <span class="toc-text">分割类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子序列"><span class="toc-number">7.4.</span> <span class="toc-text">子序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#背包"><span class="toc-number">7.5.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串编辑"><span class="toc-number">7.6.</span> <span class="toc-text">字符串编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#股票交易"><span class="toc-number">7.7.</span> <span class="toc-text">股票交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-5"><span class="toc-number">7.8.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-5"><span class="toc-number">7.8.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-5"><span class="toc-number">7.8.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分治法"><span class="toc-number">8.</span> <span class="toc-text">分治法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式问题"><span class="toc-number">8.1.</span> <span class="toc-text">表达式问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-6"><span class="toc-number">8.2.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-6"><span class="toc-number">8.2.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-6"><span class="toc-number">8.2.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学问题"><span class="toc-number">9.</span> <span class="toc-text">数学问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#公倍数和公因数"><span class="toc-number">9.1.</span> <span class="toc-text">公倍数和公因数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#质数"><span class="toc-number">9.2.</span> <span class="toc-text">质数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字处理"><span class="toc-number">9.3.</span> <span class="toc-text">数字处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机与取样"><span class="toc-number">9.4.</span> <span class="toc-text">随机与取样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-7"><span class="toc-number">9.5.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-7"><span class="toc-number">9.5.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-7"><span class="toc-number">9.5.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位运算"><span class="toc-number">10.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#位运算基础问题"><span class="toc-number">10.1.</span> <span class="toc-text">位运算基础问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二进制特性"><span class="toc-number">10.2.</span> <span class="toc-text">二进制特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-8"><span class="toc-number">10.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-8"><span class="toc-number">10.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-8"><span class="toc-number">10.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">11.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">11.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈和队列"><span class="toc-number">11.2.</span> <span class="toc-text">栈和队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单调栈"><span class="toc-number">11.3.</span> <span class="toc-text">单调栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先队列"><span class="toc-number">11.4.</span> <span class="toc-text">优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双端队列"><span class="toc-number">11.5.</span> <span class="toc-text">双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希表"><span class="toc-number">11.6.</span> <span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重集合和映射"><span class="toc-number">11.7.</span> <span class="toc-text">多重集合和映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀和和积分图"><span class="toc-number">11.8.</span> <span class="toc-text">前缀和和积分图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-9"><span class="toc-number">11.9.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-9"><span class="toc-number">11.9.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-9"><span class="toc-number">11.9.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-number">12.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串比较"><span class="toc-number">12.1.</span> <span class="toc-text">字符串比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串理解"><span class="toc-number">12.2.</span> <span class="toc-text">字符串理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串匹配"><span class="toc-number">12.3.</span> <span class="toc-text">字符串匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-10"><span class="toc-number">12.4.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-10"><span class="toc-number">12.4.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-10"><span class="toc-number">12.4.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表"><span class="toc-number">13.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表基本操作"><span class="toc-number">13.1.</span> <span class="toc-text">链表基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他链表技巧"><span class="toc-number">13.2.</span> <span class="toc-text">其他链表技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-11"><span class="toc-number">13.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-11"><span class="toc-number">13.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-11"><span class="toc-number">13.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树"><span class="toc-number">14.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#树的递归"><span class="toc-number">14.1.</span> <span class="toc-text">树的递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-number">14.2.</span> <span class="toc-text">层次遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前中后序遍历"><span class="toc-number">14.3.</span> <span class="toc-text">前中后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉搜索树"><span class="toc-number">14.4.</span> <span class="toc-text">二叉搜索树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典树"><span class="toc-number">14.5.</span> <span class="toc-text">字典树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-12"><span class="toc-number">14.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-12"><span class="toc-number">14.6.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-12"><span class="toc-number">14.6.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图"><span class="toc-number">15.</span> <span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二分图"><span class="toc-number">15.1.</span> <span class="toc-text">二分图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序"><span class="toc-number">15.2.</span> <span class="toc-text">拓扑排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-13"><span class="toc-number">15.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-13"><span class="toc-number">15.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-13"><span class="toc-number">15.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶数据结构"><span class="toc-number">16.</span> <span class="toc-text">高阶数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并查集"><span class="toc-number">16.1.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合数据结构"><span class="toc-number">16.2.</span> <span class="toc-text">复合数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习-14"><span class="toc-number">16.3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础难度-14"><span class="toc-number">16.3.1.</span> <span class="toc-text">基础难度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进阶难度-14"><span class="toc-number">16.3.2.</span> <span class="toc-text">进阶难度</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/7784fafc/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/7784fafc/&text=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/7784fafc/&is_video=false&description=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LeetCode刷题题库&body=Check out this article: http://xilou31.github.io/7784fafc/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/7784fafc/&title=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/7784fafc/&name=LeetCode刷题题库&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/7784fafc/&t=LeetCode刷题题库" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2021
+    西楼
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
