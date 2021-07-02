@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="此时是 2021.4.21，大三下学期的第八周，距离我开始春招正好满一个月。 我现在还是印象非常深刻，非常记得 2021.3.22 号这天发生了什么。 那天我把项目，一个即时通信系统给写完了，然后把文案发给女朋友，女朋友用 figma 找了一个简历的模版，然后她写了一个我感觉排版上挺不错的简历。这里十分感谢女朋友。 然后就开始了我长达一个月的春招。一开始只投了一些广州的公司，并且想法还是只投大公司">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个四非学生的2021暑期实习春招总结">
+<meta property="og:url" content="http://xilou31.github.io/d59abd41/index.html">
+<meta property="og:site_name" content="欢迎来到西楼的博客">
+<meta property="og:description" content="此时是 2021.4.21，大三下学期的第八周，距离我开始春招正好满一个月。 我现在还是印象非常深刻，非常记得 2021.3.22 号这天发生了什么。 那天我把项目，一个即时通信系统给写完了，然后把文案发给女朋友，女朋友用 figma 找了一个简历的模版，然后她写了一个我感觉排版上挺不错的简历。这里十分感谢女朋友。 然后就开始了我长达一个月的春招。一开始只投了一些广州的公司，并且想法还是只投大公司">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-02T02:46:24.628Z">
+<meta property="article:author" content="西楼">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>一个四非学生的2021暑期实习春招总结</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/1c4cd1f0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/4b69a11a/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/d59abd41/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/d59abd41/&text=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/d59abd41/&is_video=false&description=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一个四非学生的2021暑期实习春招总结&body=Check out this article: http://xilou31.github.io/d59abd41/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/d59abd41/&name=一个四非学生的2021暑期实习春招总结&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/d59abd41/&t=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量早投。"><span class="toc-number">1.</span> <span class="toc-text">尽量早投。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如果有内推的话，可以尽量找内推。"><span class="toc-number">2.</span> <span class="toc-text">如果有内推的话，可以尽量找内推。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量早点刷-LeetCode。"><span class="toc-number">3.</span> <span class="toc-text">尽量早点刷 LeetCode。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量往深处了解。"><span class="toc-number">4.</span> <span class="toc-text">尽量往深处了解。</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        一个四非学生的2021暑期实习春招总结
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">西楼</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-19T16:00:00.000Z" itemprop="datePublished">2021-04-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>此时是 2021.4.21，大三下学期的第八周，距离我开始春招正好满一个月。</p>
+<p>我现在还是印象非常深刻，非常记得 2021.3.22 号这天发生了什么。</p>
+<p>那天我把项目，一个即时通信系统给写完了，然后把文案发给女朋友，女朋友用 figma 找了一个简历的模版，然后她写了一个我感觉排版上挺不错的简历。这里十分感谢女朋友。</p>
+<p>然后就开始了我长达一个月的春招。一开始只投了一些广州的公司，并且想法还是只投大公司，小公司只拿来练手。</p>
+<p>包括位于广州的腾讯微信，虎牙，三七互娱等等。</p>
+<p>先说说微信把，比较幸运的是，投了微信没多久就发起了面试，得益于腾讯的制度，腾讯的制度是要么三个工作日内，要么六个工作日内会发起面试。这时的我以为得到一个面试机会是非常容易的，一个月后的我却没想到其实这已经是巅峰了。</p>
+<p>微信发起了面试约在了一周后的星期一晚上，平台是腾讯会议。这期间还跟女朋友吵了一架。</p>
+<p>我准备了一个星期的面试，这个时候的我主要专注在项目上。这个时候的我还没有想到未来的一个月我会多痛苦。</p>
+<p>结果真正发起面试的时候，问的大部分都是八股文。我记得我数据库的部分很多都没有打上来，比如聚集索引，这个名词我从来没有听说过。然后还问了多进程的通信方式，我知道有管道、命名管道、消息队列、共享内存这些，但是一问起底层来我就不知道原理。</p>
+<p>最后是两道题，一道题是双向链表插入和删除，这道题比较简单，做出来了但是做的时间比较长；另一道题是给一个完全二叉树，返回节点数，要求时间复杂度小于 O(n)，这道题没有想出来。</p>
+<p>然后其实当时心态真的我也不知道为什么这么乐观 😢 觉得自己会过，然后第二天下午去腾讯校招官网查进度，挂了。</p>
+<p>当时其实是抱着学习的心态去面试的，但是面试挂了，其实说到底还是有点不甘心的把。</p>
+<p>之后的我变得非常焦虑，开始各种公司都投。腾讯面完后时间是 2021.3.30。也就是说我从四月份才开始海投。</p>
+<p>这里就是春招犯的第一个错误了：投的时间太晚了。</p>
+<p>春招的战线其实很长，从过年前到四月底。春、秋招又分提前批和正式批。春招因为我亲身经历过，比较了解，一般提前批是一月初到二月中旬这段时间，而正式批是 2 月中下旬开始，到 4 月中旬。</p>
+<h2 id="尽量早投。"><a href="#尽量早投。" class="headerlink" title="尽量早投。"></a>尽量早投。</h2><p>当然晚投也有好处，那就是准备会充分一点。</p>
+<p>但问题在于，headcount(hc)，也就是名额。hc 是一定的，有一些岗位，一旦招够人了就不招了。你越晚投递简历，就意味着名额越少。而名额越少，意味着对你的要求也会变高。与此同时，越晚投递，我感觉 hr 的处理效率也会变慢，不知道对不对。因为你早投的话，hr 要处理只有简历，但是你晚投递的话，hr 还要面对各种各样的面试安排，入职接待等等。花在看你简历的时间就会变少。</p>
+<p>现在想想，如果我二月底三月初就投了，那可能会多一些面试机会。</p>
+<p>在我从四月份开始海投之后，我就一直等消息。投了一共四十家公司左右吧，有收到一些笔试的机会，但大部分都石沉大海，连简历被看的机会都没有。</p>
+<h2 id="如果有内推的话，可以尽量找内推。"><a href="#如果有内推的话，可以尽量找内推。" class="headerlink" title="如果有内推的话，可以尽量找内推。"></a>如果有内推的话，可以尽量找内推。</h2><p>这里要说一下内推这件事，内推怎么看待呢，我觉得是，肯定是有用的，但其实用处没有想象中那么大。首先就算你是内推的，该面试还是面试。大部分公司对于内推，都是免去简历筛选，直通笔试，很少有公司能免笔试。所以其实该走的流程你还是要走。</p>
+<p>但是呢，我在四月份才进行海投，这个时间其实已经非常晚了，再加上我的学校其实并不算非常的好，只是一个双非本科。没有内推，导致了很多简历都石沉大海。也不是说有内推就一定有笔试/面试机会把，只能说机会会多一点。而且内推还有个好处就是会优先处理，各种流程上可能会短一些。比如说微软，我 3.26 号得到了笔试的机会，给了 3.26-3.28 这三天任两个小时内做完，当天晚上就完成了笔试，然后等到 4.12 才被发起面试，说 4.19 面试，笔试到面试中间间隔了三个星期。同时我知道的跟我同批完成笔试的，有一些 4.7 号就面试了，短短一个星期。</p>
+<p>在得到一些公司的笔试机会后，我开始有一段时间连续做笔试。这时候我才发现我自己对于算法知识上的缺失。</p>
+<h2 id="尽量早点刷-LeetCode。"><a href="#尽量早点刷-LeetCode。" class="headerlink" title="尽量早点刷 LeetCode。"></a>尽量早点刷 LeetCode。</h2><p>其实我从去年开学 10 月份左右就开始准备了，会上牛客网看一些面经之类的东西。然后看面经有不懂的地方会去总结。但是等到真正投简历，真正笔试的时候才发现，算法真的很重要。算法这个东西的重要程度，大概是怎样的呢。</p>
+<p>首先笔试会考算法，一般是两个小时完成四道题，或者一个小时完成两道题，差不多平均半个小时一道题的样子。然后难度的话，一般四道题的卷子会有一道 LeetCode 上 Easy 难度的题，两道 Medium 的题，一道 Hard 题；两道题的卷子一般是两道 Medium 的题，也有一些是一道 Medium 一道 Hard。一般四道题做出来三道左右就比较稳，不过也要看排名，看别人的做题情况。</p>
+<p>面试相对来说会简单一些，因为其实面试给你的时间并不是很多，前面会问你一些项目相关的内容和八股文，而面试一般在一个小时以内把，给你做题的时间，可能一道题最多给你三十分钟左右把。面试一般是 Easy 和 Medium 居多，少数会出 Hard。</p>
+<p>刷题时间的话最好提前三个月开始刷题，如果你是打算冲提前批的话，就拿春招来说，想 1、2 月份就开始投简历的话，那么 9 月份就制定刷题计划是比较合理的。刷题量的话我也不好说，因为我也没怎么刷题 😭(春招犯下的最大错误)。据说能达到 Easy 题和 Medium 题能 10 秒内看出思路就差不多了(一些大佬说的)。</p>
+<p>刷题可以在 LeetCode 上刷，上面的题比较全，然后是针对某个公司针对性的刷题的话，可以看一下 CodeTop 这个网站，也是我今年春招才知道的一个网站。书籍的话，我看过比较好的是《labuladong 的算法小抄》，上面有一些题型的总结，原来作者在 LeetCode 上的一些题解，作者把他们总结到一起，作为 Github 上的一个项目，后来这个项目比较火，这个作者就直接出书了。然后还可以看看《剑指 Offer》《编程之美》《程序员面试金典》，《剑指 Offer》这本书也比较值得推荐，上面的题都比较经典，作者是微软的一个工程师。然后《编程之美》这本书上面也是微软的一些面试题型。《程序员面试金典》这本书就相对来说大本一些(贵很多)，上面的题比较多也比较全(这本书也是女朋友给我买的生日礼物)。</p>
+<p>刷题顺序据一些大佬说，先从树开始刷，因为跟树相关的题都比较套路。然后一些板块无非就是动态规划、回溯法、二分查找、哈希表、BFS 和 DFS、数据结构。这一些是重点考察的对象。数据结构无非就是，我前面提到的树，还有栈和队列，链表。少数情况下会考察堆和图。堆和图应该只用掌握基本的算法就行，比如堆就是堆排序，节点如何下沉或者上浮。图就是 BFS 和 DFS，少少数情况下考察 Dijkstra 算法。</p>
+<p>总的来说，在整个面试过程中，算法绝对是非常重要的一环，面试无非就是，算法+八股文+项目。算法要是不行的话，首先笔试关过不了，其次就算笔试过了，或者免去笔试直接得到了面试机会，你前面八股文、项目如果不是回答的非常出色的话，你算法写不出来，还是过不了面试。所以真的要重视算法，尽量在你想投递简历的时间提前三个月开始刷题，并且要有一个长期的刷题计划，比如每天要刷多少道，Easy、Medium、Hard 比例是多少，要刷什么类型的题，不要三天打鱼两天晒网。</p>
+<p>从 3.22 号开始投递简历，到今天 4.21 号，整整一个月时间，我只收到了两家公司的面试。一家是腾讯中的微信，前面有说到，然后另一家是微软。一共是三次面试机会，不多，其中微软是两轮平行面。在面试过程中，我又发现了我对于八股文知识的缺失。</p>
+<h2 id="尽量往深处了解。"><a href="#尽量往深处了解。" class="headerlink" title="尽量往深处了解。"></a>尽量往深处了解。</h2><p>之前也说到从 10 月份就开始准备春招，但那段时间主要是看面经来学习，这就导致了一个问题，我了解的东西看似很多，但其实都不是很深入。比如说微信面试官问我，进程的通信方式，我看过面经所以记得有消息队列，共享内存等等，但是面试官一旦深入问我，我就答不上来了。面完微信后去了解才知道，比如消息队列，无非就是内核中的一个链表，每个节点都有一个标识符。再比如，Mysql 索引为什么使用 B+树而不是 B 树或者 AVL 树呢，了解了 B+树的底层后才知道说，B+树其实树的高度会矮一些，并且查询效率比较平均。</p>
+<p>而我之前呢，是处于一种，知道 Mysql 索引使用 B+树(当然也有哈希索引等等)，但是不知道为什么使用 B+树这种状态，就了解的比较浅层。而且其实这种深层的了解，本质上也是在学习算法，底层都是数据结构。比如为什么 Mysql 索引要用树(查范围算法复杂度 O(logn))，为什么 epoll 返回的集合不限长度，只能内存大小有关系(因为返回的是链表的头节点)。</p>
+<p>了解一个知识最好把他的底层也了解了，这样面试官问起来才能游刃有余。</p>
+<p>前面说了算法，说了八股文，最后再来说说项目。</p>
+<p>通常来说，实习生一面会问八股文，然后一面过了在二面才会问项目(然而我两家公司都没过一面 Orz)。项目的话，其实我也没啥心得，我感觉写一个自己比较感兴趣的项目会是一个比较好的选择，现在是一些秒杀项目比较火，我感觉也不一定要写这些，我见过别人写过一个 RPC 的框架，我感觉也是一些比较好的选择。然后二面的话听说一般会问一些项目扩展，比如让你设计一个系统之类的。</p>
+<p>说了这么多，最后总结一下我的春招吧。</p>
+<p>首先是一开始的方向就不太对，其实 10 月份那一会就应该开始刷题了，算法这块比较薄弱。然后那段时间主要复习是看面经，主要是一些八股文，但看八股文也不深入，大部分处于就是只了解一个名词的程度。然后项目也是二月份才开始做，也确实是太晚了。</p>
+<p>整个春招导致的结果就是，投了 40 家公司左右，大部分简历投了石沉大海，大概 10 家左右有笔试机会，只有 2 家有面试机会，分别是腾讯和微软，腾讯是因为免笔试，严格意义上来说只有微软是过了笔试的。两家公司都是一面挂了，目前处于 0offer 的状态。</p>
+<p>反正我是对暑期实习不抱有任何希望了，死心了，也承认了自己的平庸。目前想法的话是直接准备秋招提前批把，现在是 4.21 号，秋招提前批大概是 6 月中旬左右吧，也就是还有大概 1 个半月的时间学习。这一个半月的话，算法题是要重点练习的。刷题计划还没想好，但肯定会好好刷题的。</p>
+<p>虽然这次春招确实失败了，一个 offer 都没有，但我想这并不是终点。高考是明年的春招，这次顶多是模拟考而已，找到自己的问题并且改正就好了。我还会回来的。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量早投。"><span class="toc-number">1.</span> <span class="toc-text">尽量早投。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如果有内推的话，可以尽量找内推。"><span class="toc-number">2.</span> <span class="toc-text">如果有内推的话，可以尽量找内推。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量早点刷-LeetCode。"><span class="toc-number">3.</span> <span class="toc-text">尽量早点刷 LeetCode。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽量往深处了解。"><span class="toc-number">4.</span> <span class="toc-text">尽量往深处了解。</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/d59abd41/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/d59abd41/&text=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/d59abd41/&is_video=false&description=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一个四非学生的2021暑期实习春招总结&body=Check out this article: http://xilou31.github.io/d59abd41/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/d59abd41/&title=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/d59abd41/&name=一个四非学生的2021暑期实习春招总结&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/d59abd41/&t=一个四非学生的2021暑期实习春招总结" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2021
+    西楼
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
