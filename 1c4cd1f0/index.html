@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="项目背景在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。因为以后要支持多语言，出于多语言的兼容问题，现需要将 Seata 的通信协议拓展支持 HTTP2。 HTTP2 跟 HTTP1.1 有什么区别 多路复用 头部压缩 二进制分帧 请求优先级 服务器推送  方案描述打包、拆包（头部压缩、二进制分帧） 修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seata protocol supports http2">
+<meta property="og:url" content="http://xilou31.github.io/1c4cd1f0/index.html">
+<meta property="og:site_name" content="欢迎来到西楼的博客">
+<meta property="og:description" content="项目背景在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。因为以后要支持多语言，出于多语言的兼容问题，现需要将 Seata 的通信协议拓展支持 HTTP2。 HTTP2 跟 HTTP1.1 有什么区别 多路复用 头部压缩 二进制分帧 请求优先级 服务器推送  方案描述打包、拆包（头部压缩、二进制分帧） 修改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xilou31.github.io/1c4cd1f0/seata_protobuf.png">
+<meta property="article:published_time" content="2021-06-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-19T06:13:07.022Z">
+<meta property="article:author" content="西楼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xilou31.github.io/1c4cd1f0/seata_protobuf.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Seata protocol supports http2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/1842b797/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/4b69a11a/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/1c4cd1f0/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/1c4cd1f0/&text=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/1c4cd1f0/&is_video=false&description=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Seata protocol supports http2&body=Check out this article: http://xilou31.github.io/1c4cd1f0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/1c4cd1f0/&name=Seata protocol supports http2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/1c4cd1f0/&t=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目背景"><span class="toc-number">1.</span> <span class="toc-text">项目背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP2-跟-HTTP1-1-有什么区别"><span class="toc-number">2.</span> <span class="toc-text">HTTP2 跟 HTTP1.1 有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方案描述"><span class="toc-number">3.</span> <span class="toc-text">方案描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打包、拆包（头部压缩、二进制分帧）"><span class="toc-number">3.0.1.</span> <span class="toc-text">打包、拆包（头部压缩、二进制分帧）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-连接多路复用"><span class="toc-number">3.0.2.</span> <span class="toc-text">HTTP 连接多路复用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间规划"><span class="toc-number">4.</span> <span class="toc-text">时间规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Seata protocol supports http2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">西楼</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-02T16:00:00.000Z" itemprop="datePublished">2021-06-03</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>在现在的版本，Seata 中 RM、TM 之间的通信，使用的是自定义的一个协议，再使用 ProtoBuf 来进行序列化的操作，协议的格式如下。<br><img src="/1c4cd1f0/seata_protobuf.png" alt="seata_protobuf.png"><br>因为以后要支持多语言，出于多语言的兼容问题，现需要将 Seata 的通信协议拓展支持 HTTP2。</p>
+<h2 id="HTTP2-跟-HTTP1-1-有什么区别"><a href="#HTTP2-跟-HTTP1-1-有什么区别" class="headerlink" title="HTTP2 跟 HTTP1.1 有什么区别"></a>HTTP2 跟 HTTP1.1 有什么区别</h2><ol>
+<li>多路复用</li>
+<li>头部压缩</li>
+<li>二进制分帧</li>
+<li>请求优先级</li>
+<li>服务器推送</li>
+</ol>
+<h2 id="方案描述"><a href="#方案描述" class="headerlink" title="方案描述"></a>方案描述</h2><h4 id="打包、拆包（头部压缩、二进制分帧）"><a href="#打包、拆包（头部压缩、二进制分帧）" class="headerlink" title="打包、拆包（头部压缩、二进制分帧）"></a>打包、拆包（头部压缩、二进制分帧）</h4><ol>
+<li>修改 ProtocolV1Decoder、ProtocolV1Encoder，抽象为 ProtocolDecoder、ProtocolEncoder。</li>
+<li>增加 ProtocolHTTP2Decoder、ProtocolHTTP2Encoder</li>
+<li>将传输单元定义为 Frame，做进一步抽象。</li>
+<li>在源码中加入 HPACK 算法的实现，用于 Header Frame 的压缩。</li>
+</ol>
+<h4 id="HTTP-连接多路复用"><a href="#HTTP-连接多路复用" class="headerlink" title="HTTP 连接多路复用"></a>HTTP 连接多路复用</h4><ol>
+<li>在 NettyBaseConfig、TransportProtocolType 等类中，加入 HTTP2 的支持。</li>
+<li>增加 AbstractNettyRemoting 中，对 Http2Stream 的创建</li>
+</ol>
+<h2 id="时间规划"><a href="#时间规划" class="headerlink" title="时间规划"></a>时间规划</h2><ul>
+<li>尝试自己做一个 HTTP2 的 NettyServer 的 Demo<ul>
+<li>7.1 - 7.10</li>
+<li>阅读 Netty 关于 HTTP2 相关文档，并实现 Demo</li>
+</ul>
+</li>
+<li>用 Wireshark 抓包分析并修改 Demo<ul>
+<li>7.10 - 7.15</li>
+<li>主要看 Headers 是否压缩，是否实现二进制分帧等等</li>
+</ul>
+</li>
+<li>在 Seata 中尝试修改源码<ul>
+<li>7.15 - 7.30</li>
+<li>尝试修改上述方案描述所提到的相关类</li>
+</ul>
+</li>
+<li>性能测试，若性能不佳则找出原因<ul>
+<li>7.30 - 8.7</li>
+<li>会测试 HTTP2 和原本私有协议之间的性能差距</li>
+</ul>
+</li>
+<li>代码重构<ul>
+<li>8.7 - 8.20</li>
+<li>结合 Seata 社区的意见，对提交的代码进行修改或者重构</li>
+</ul>
+</li>
+<li>书写相关的文档<ul>
+<li>8.20 - 8.30</li>
+<li>针对两个月以来的成果书写文档</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://github.com/seata/seata/issues/823" target="_blank" rel="noopener">Use Protobuf as the codec of RPC（Seata Issues#823 ）</a><br><a href="https://github.com/seata/seata/issues/893" target="_blank" rel="noopener">New RPC protocol propose. （Seata Issues#893）</a><br><a href="https://datatracker.ietf.org/doc/html/rfc7540" target="_blank" rel="noopener">RFC7540（HTTP/2）</a><br><a href="https://datatracker.ietf.org/doc/html/rfc7541" target="_blank" rel="noopener">RFC7541（HPACK）</a><br><a href="https://grpc.github.io/grpc/core/md_doc__p_r_o_t_o_c_o_l-_h_t_t_p2.html" target="_blank" rel="noopener">gRPC over HTTP2</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目背景"><span class="toc-number">1.</span> <span class="toc-text">项目背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP2-跟-HTTP1-1-有什么区别"><span class="toc-number">2.</span> <span class="toc-text">HTTP2 跟 HTTP1.1 有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方案描述"><span class="toc-number">3.</span> <span class="toc-text">方案描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打包、拆包（头部压缩、二进制分帧）"><span class="toc-number">3.0.1.</span> <span class="toc-text">打包、拆包（头部压缩、二进制分帧）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-连接多路复用"><span class="toc-number">3.0.2.</span> <span class="toc-text">HTTP 连接多路复用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间规划"><span class="toc-number">4.</span> <span class="toc-text">时间规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://xilou31.github.io/1c4cd1f0/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://xilou31.github.io/1c4cd1f0/&text=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xilou31.github.io/1c4cd1f0/&is_video=false&description=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Seata protocol supports http2&body=Check out this article: http://xilou31.github.io/1c4cd1f0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://xilou31.github.io/1c4cd1f0/&title=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://xilou31.github.io/1c4cd1f0/&name=Seata protocol supports http2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://xilou31.github.io/1c4cd1f0/&t=Seata protocol supports http2" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2021
+    西楼
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
