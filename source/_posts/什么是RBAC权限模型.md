@@ -6,7 +6,7 @@ DBAC是Role-Based Access Control的简称，即基于角色的权限控制。
 翻译成人话就是，每一个用户都有对应的角色，不同的角色拥有不同的权限。
 
 在传统的权限控制中，是直接把权限给予相关用户。
-![classicAC.png](classicAC.png)
+![ClassicAC.png](ClassicAC.png)
 
 但是RBAC权限模式则多加了一个中间层，即角色。
 ![RBAC.png](RBAC.png)
