@@ -1,6 +1,7 @@
 ---
 abbrlink: dcb67373
 date: 2021-07-02
+description: DH 密钥交换算法
 ---
 Deffie-Hellman 简称 DH 算法。
 

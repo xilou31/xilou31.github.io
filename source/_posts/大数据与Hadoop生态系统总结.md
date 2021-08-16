@@ -1,6 +1,7 @@
 ---
 abbrlink: 1842b797
 date: 2021-06-05
+description: 大数据
 ---
 # 大数据概念理解
 

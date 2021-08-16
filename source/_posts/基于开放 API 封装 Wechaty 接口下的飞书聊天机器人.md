@@ -1,6 +1,7 @@
 ---
 abbrlink: 76ccdb2e
 date: 2021-06-09
+description: Summer Code 2021 Wechaty Proposal
 ---
 ## 项目背景
 

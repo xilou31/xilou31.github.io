@@ -1,6 +1,7 @@
 ---
 abbrlink: 7784fafc
 date: 2021-06-20
+description: LeetCode 各种题型集合的题库。
 ---
 ## 贪心算法
 

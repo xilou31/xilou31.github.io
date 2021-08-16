@@ -1,6 +1,7 @@
 ---
 abbrlink: 1c4cd1f0
 date: 2021-06-03
+description: Summer Code 2021 Seata Proposal
 ---
 ## 项目背景
 

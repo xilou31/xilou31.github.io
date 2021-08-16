@@ -1,5 +1,7 @@
 ---
 abbrlink: ec4f06e7
+date: 2021-7-26
+description: DBAC 鉴权模型
 ---
 DBAC是Role-Based Access Control的简称，即基于角色的权限控制。
 

@@ -8,7 +8,7 @@ subtitle: ''
 description: 'Just a boy caught up in dreams and fantasies'
 keywords:
 author: 西楼
-language: zh-CN
+language: zh-Hans
 timezone: ''
 
 # URL
@@ -97,9 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cactus
-theme_config:
-  colorscheme: white
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -107,15 +105,3 @@ deploy:
   type: git
   repository: https://github.com/xilou31/xilou31.github.io.git
   branch: master
-
-live2d:
-  enable: true
-  pluginModelPath: assets/
-  model:
-    use: live2d-widget-model-haruto  #模板目录，在node_modules里
-  display:
-    position: left
-    width: 150 
-    height: 300
-  mobile:
-    show: false  #是否在手机进行显示
